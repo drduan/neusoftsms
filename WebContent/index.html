@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>index.html</title>
+<meta charset="utf-8">
+<meta name="keywords" content="keyword1,keyword2,keyword3">
+<meta name="description" content="this is my page">
+<meta name="content-type" content="text/html; charset=UTF-8">
+
+<!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+<script type="text/javascript"
+	src="/neusoftsms/sysjs/jquery-2.1.1.min.js"></script>
+<link type="text/css" rel="stylesheet" href="./css/index.css">
+</head>
+<body>
+	<div class="wrap">
+		<div class="nav">
+			<div class="nav_logo"></div>
+
+			<div class="menu1">
+				<form action="" target="show_area" method="post">
+
+					<div class="menuhead">信息管理</div>
+					<button url="/neusoftsms/neusoft/crol/teacheraction/getInfo">
+						<div class="bg1">
+							<img src="./imgs/Teacher_female_24px_1185975_easyicon.net.ico" />
+						</div>
+						讲师信息
+					</button>
+					<button url="/neusoftsms/neusoft/crol/studentaction/getInfo">
+						<div class="bg1">
+							<img src="./imgs/Student_24px_1185177_easyicon.net.ico" />
+						</div>
+						学生信息
+					</button>
+					<button url="/neusoftsms/neusoft/crol/classinfoaction/getInfo">
+						<div class="bg1">
+							<img src="./imgs/class_24px_1160489_easyicon.net.ico" />
+						</div>
+						班级信息
+					</button>
+					<button>
+						<div class="bg1">
+							<img
+								src="./imgs/course_education_school_training_24px_1581_easyicon.net.ico" />
+						</div>
+						课程信息
+					</button>
+					<button style="border: 0px;">
+						<div class="bg1">
+							<img src="./imgs/Student_id_24px_1185973_easyicon.net.ico" />
+						</div>
+						证件信息
+					</button>
+					<input type="hidden" value="1" name="pageNum">
+				</form>
+			</div>
+		</div>
+		<div class="nav_right">
+			<div class="title">
+				<i>大连东软信息学院信息管理系统</i>
+			</div>
+			<div class="show_data">
+				<iframe name="show_area"></iframe>
+			</div>
+		</div>
+	</div>
+
+
+</body>
+<script type="text/javascript">
+	(function() {
+		$("").ready(function() {
+
+			$(".menu1 button").click(function() {
+
+				$(this).parents("form").attr("action", $(this).attr("url"));
+
+			});
+
+		});
+
+	})();
+</script>
+</html>

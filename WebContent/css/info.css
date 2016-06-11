@@ -1,0 +1,109 @@
+.tb {
+	margin: auto;
+	margin-top:60px;
+	font-size: 12px;
+	text-align: center;
+	width: 80%;
+	border-collapse: collapse;
+	line-height: 22px;
+}
+
+.tb_th th {
+	border-bottom: 1px solid #ff0000;
+	line-height: 30px;
+	font-weight:bold;
+	font-size:14px;
+}
+.tb_th td{
+	border-bottom: 1px solid #ff0000;
+	line-height: 30px;
+	font-weight:bold;
+	font-size:14px;
+}
+.tb tbody td{
+border-bottom: 1px solid #ff0000;
+
+
+}
+.tb_th th:FIRST-CHILD {
+	color:red;
+	font-weight:bold;
+	font-size:14px;text-align: left;
+}
+ td:FIRST-CHILD {
+	color:red;
+	font-weight:bold;
+	font-size:14px;
+	text-align: left;
+}
+.tb tbody tr:HOVER {
+	background-color:#eeffcc;
+}
+.bt_delete{
+	border:0px;
+	background-color:transparent;
+	
+}
+.bt_update{
+	border:0px;
+	background-color:transparent;
+	
+}
+.bt_delete div{
+width:16px;
+height: 16px;
+float:left;
+}
+.bt_update div{
+width:16px;
+height: 16px;
+float:left;
+}
+.add_massage{
+	background-color:#AACCE5;
+	width:60px;
+	height:60px;
+	float:right;
+	margin-top: -58px;
+	margin-right: -6px;
+	border-radius:0px 6px 0px 100px;
+	text-align: center;
+	
+}
+.add_massage button{
+border: 0px;
+color:#ffffff;
+background-color: transparent;
+margin-top: 15px;
+
+}
+.add_massage:HOVER {
+	background-color: #6188AE;
+}
+.bt_cotr{
+right:0px;
+width:32px;
+top:110px;
+position:absolute;
+}
+.bt_cotr button{
+border:0px;
+background-color: #AACCE5;
+color:#ffffff;
+width:32px;
+height: 50px;
+border-radius:19px 0px 19px 0px; 
+margin-top:6px;
+margin-right:-4px; 
+}
+.bt_cotr button:HOVER {
+	background-color: #6188AE;
+}
+i{font-style:normal;}
+.chose-btn{
+	border:0px;
+	margin-left:19px;
+	margin-top:10px;
+	background-color: transparent;
+	
+}

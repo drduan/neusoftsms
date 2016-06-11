@@ -1,0 +1,51 @@
+.table_update{border:0px solid #ff0000;
+margin: auto;
+width:400px;
+font-size:14px;
+line-height: 36px;
+margin-top:30px;
+font-weight:bold;
+}
+.table_update tr td:FIRST-CHILD {
+	text-align: right;
+	
+}
+.table_update input[type=text], .table_update select{
+	width:140px;
+	height:26px;
+	border-radius:6px;
+	border:1px solid #6188ea;
+}
+.table_update .btn_submit{
+width:100%;
+text-align:center;
+	margin-top: 10px;
+	margin-left:-30px;
+	border:0px solid #ff0000;
+}
+.table_update input[type=submit]{
+	width:70px;
+	border:0px;
+	border-radius:3px;
+	height:30px;
+	background-color: #226699;
+	color:#ffffff;
+}
+.table_update input[type=reset]{
+	width:70px;
+	border:0px;
+	border-radius:3px;
+	height:30px;
+	background-color: #226699;
+	color:#ffffff;
+}
+.validate_1{font-size:12px;
+color:#ee6677;
+font-weight: normal;
+margin-left: 20px;
+position: absolute;
+}
+.validate_1 img{
+	margin:-2px;
+	margin-right: 6px;
+}
