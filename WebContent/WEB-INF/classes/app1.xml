@@ -25,7 +25,8 @@
 		<entry key="studentCardDAO" value-ref="studentCardDAO"></entry>
 		<entry key="studentDAO" value-ref="studentDAO"></entry>
 		<entry key="subjectinfoDAO" value-ref="subjectinfoDAO"></entry>
-	
+		<entry key="userInfoDAO" value-ref="userInfoDAO"></entry>
+		<entry key="userLogInfoDAO" value-ref="userLogInfoDAO"></entry>
 	</util:map>
 	
 	<tx:annotation-driven transaction-manager="transactionManager"/>
@@ -72,7 +73,10 @@
 				</value>
 				<value>org/neusoft/hb/entites/Teacher.hbm.xml</value>
 				<value>org/neusoft/hb/entites/Classinfo.hbm.xml</value>
-			</list>
+				<value>org/neusoft/hb/entites/Userinfo.hbm.xml</value>
+				<value>
+					org/neusoft/hb/entites/Userloginfo.hbm.xml
+				</value></list>
 		</property>
 	</bean>
 </beans>

@@ -3,7 +3,6 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:util="http://www.springframework.org/schema/util" xmlns:tx="http://www.springframework.org/schema/tx"
-
 	xsi:schemaLocation="http://www.springframework.org/schema/beans 
 						http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
 						http://www.springframework.org/schema/context
@@ -12,10 +11,10 @@
 						http://www.springframework.org/schema/util/spring-util-3.1.xsd
 						http://www.springframework.org/schema/tx 
 						http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
-						
 						">
 
 	<context:annotation-config></context:annotation-config>
+	<!-- 隐式地向 Spring容器注册AutowiredAnnotationBeanPostProcessor、RequiredAnnotationBeanPostProcessor、CommonAnnotationBeanPostProcessor以及PersistenceAnnotationBeanPostProcessor这4个BeanPostProcessor。 -->
 	<context:component-scan base-package="org.neusoft"></context:component-scan>
 	
 	<util:map id="daoMap" map-class="java.util.HashMap">
@@ -25,8 +24,10 @@
 		<entry key="studentCardDAO" value-ref="studentCardDAO"></entry>
 		<entry key="studentDAO" value-ref="studentDAO"></entry>
 		<entry key="subjectinfoDAO" value-ref="subjectinfoDAO"></entry>
-	
+		<entry key="userInfoDAO" value-ref="userInfoDAO"></entry>
+		<entry key="userLogInfoDAO" value-ref="userLogInfoDAO"></entry>
 	</util:map>
+	<!-- 取代ListFactoryBean、MapFactoryBean、SetFactoryBean、PropertiesFactoryBean。 -->
 	
 	<tx:annotation-driven transaction-manager="transactionManager"/>
 	
@@ -34,10 +35,11 @@
 		p:sessionFactory-ref="sessionFactory"
 	
 	></bean>
-	
+	<!-- C3P0是一个开放源代码的JDBC连接池，它在lib目录中与Hibernate一起发布,包括了实现jdbc3和jdbc2扩展规范说明的Connection 和Statement 池的DataSources 对象。  
+   -->
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
 		<property name="driverClass" value="com.mysql.jdbc.Driver"></property>
-		<property name="jdbcUrl" value="jdbc:mysql://127.0.0.1:3306/school?useUnicode=true&amp;characterEncoding=utf-8&amp;characterSetResults=utf-8">
+		<property name="jdbcUrl" value="jdbc:mysql://127.0.0.1:3306/school">
 		</property>
 		<property name="user" value="root"></property>
 		<property name="password" value="123456"></property>
@@ -72,8 +74,10 @@
 				</value>
 				<value>org/neusoft/hb/entites/Teacher.hbm.xml</value>
 				<value>org/neusoft/hb/entites/Classinfo.hbm.xml</value>
-			</list>
+				<value>org/neusoft/hb/entites/Userinfo.hbm.xml</value>
+				<value>
+					org/neusoft/hb/entites/Userloginfo.hbm.xml
+				</value></list>
 		</property>
 	</bean>
-	
 </beans>

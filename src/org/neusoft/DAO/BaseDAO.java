@@ -13,7 +13,9 @@ import org.neusoft.interfaces.DAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.transaction.annotation.Transactional;
-@Transactional
+
+import com.sun.xml.internal.bind.v2.TODO;
+@Transactional //声明该方法需要事务处理
 public class BaseDAO<T> extends HibernateTemplate implements DAO {
 	public static final int INSERT=1;
 	public static final int DELETE=2;
@@ -27,7 +29,11 @@ public class BaseDAO<T> extends HibernateTemplate implements DAO {
 		ParameterizedType parameterizedType = (ParameterizedType) this
 				.getClass().getGenericSuperclass();
 		this.type = (Class) parameterizedType.getActualTypeArguments()[0];
+	    //entityClass = (Class<E>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
+
 	}
+	
+
 
 	@Override
 	public List getAll() {
@@ -43,6 +49,7 @@ public class BaseDAO<T> extends HibernateTemplate implements DAO {
 	}
 
 	@Override
+	//实体criterion
 	public List getInfosByProperties(Criterion... criterions) {
 
 		return getInfosByProperties(null, null, criterions);
@@ -63,6 +70,8 @@ public class BaseDAO<T> extends HibernateTemplate implements DAO {
 		return findByCriteria(criteria);
 	}
 
+	
+//todo 
 	void update(int wtd, Object... ts) {
 		int i=0;
 		switch (wtd) {
@@ -117,9 +126,12 @@ public class BaseDAO<T> extends HibernateTemplate implements DAO {
 
 	@Override
 	public int getPageCountByRowCount(int rowCount) {
-		
+		//setMaxResult(int maxResults):设定一次最多检索出的对象的数目，
+		// query.setFirstResult(2);//显示第几页，当前页
 		Session session= this.getSessionFactory().getCurrentSession();
 		Query query=session.createQuery("select count(v1) from "+this.type.getSimpleName()+" v1 ");
+		System.out.println("baseDao"+query.toString());
+		
 		long count = (long) query.uniqueResult();
 		return (int) (count%rowCount==0?count/rowCount:(count/rowCount)+1);
 	}

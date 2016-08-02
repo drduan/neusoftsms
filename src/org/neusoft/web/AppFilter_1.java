@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter;
 
+
+ //StrutsPrepareFilter and StrutsExecuteFilter, have a look at the implementation here
 public class AppFilter_1 extends StrutsPrepareAndExecuteFilter {
 	
 	@Override
@@ -24,6 +26,7 @@ public class AppFilter_1 extends StrutsPrepareAndExecuteFilter {
 		if ("GET".equals(request.getMethod())) {
 			//response.sendRedirect("/neusoftsms/index.jsp?er=-1");
 			//return;
+			System.out.println(request.getServletPath());
 			throw new ServletException("对不起,您的操作不符合规范");
 		}
 		

@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.ParentPackage;
+import org.neusoft.hb.entites.Student;
 import org.neusoft.mdservice.ModelService;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
@@ -20,15 +21,6 @@ import com.opensymphony.xwork2.ActionContext;
  * @author Star
  *
  */
-/*
- * Java 类装载器classloader和 命名空间namespace
- * java 通过
- * 
- * 
- */
-
-//安凯星
-
 @Controller
 @Lazy(true)
 @ParentPackage("struts-default")
@@ -144,8 +136,6 @@ public abstract class BaseAction {
 	 */
 	@Action(value="getInfo")
 	public String getInfo(){
-		System.out.println(getKey()+"_++++++++BaseAction");
-		
 		Map mp= (Map) ActionContext.getContext().get("request");
 		mp.put("infoes", this.getService().getInfoByPageNum(getKey(), getPageNum(), getRowCount()));
 		

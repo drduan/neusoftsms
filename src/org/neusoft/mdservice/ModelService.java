@@ -1,6 +1,8 @@
 package org.neusoft.mdservice;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -12,7 +14,11 @@ import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 import org.neusoft.hb.entites.Student;
 import org.neusoft.hb.entites.Studentandsubject;
+import org.neusoft.hb.entites.StudentandsubjectId;
+import org.neusoft.hb.entites.Studentcard;
 import org.neusoft.hb.entites.Subjectinfo;
+import org.neusoft.hb.entites.Userinfo;
+import org.neusoft.hb.entites.Userloginfo;
 import org.neusoft.interfaces.DAO;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,6 +33,8 @@ public class ModelService {
 	public static final String SUBJECTINFO = "subjectinfoDAO";
 	public static final String STUDENTCARD = "studentCardDAO";
 	public static final String STUDENTANDSUBJECT = "studentAndSubjectDAO";
+	public static final String USERINFO = "userInfoDAO";
+	public static final String USERLOGINFO = "userLogInfoDAO";
 
 	@Resource(name = "daoMap")
 	private Map<String, DAO> daoMap;
@@ -49,11 +57,7 @@ public class ModelService {
 
 	// 获取表格所以信息
 	public List getAll(String key) {
-		
-		System.out.println("daoMap.get"+daoMap.get(key));
-		
 		return this.daoMap.get(key).getAll();
-		
 	}
 
 	/**
@@ -131,7 +135,6 @@ public class ModelService {
 	 * @param entities
 	 *            根据hibernate规范和业务需要封装有关数据的实体对象
 	 */
-
 	public void update_batch(String key, Object... entities) {
 		this.daoMap.get(key).excute_update(entities);
 	}
@@ -169,4 +172,79 @@ public class ModelService {
 		List<Studentandsubject> infoes = daoMap.get(STUDENTANDSUBJECT).getInfosByProperties(c1);
 		return infoes;
 	}
+	public boolean subjectToUpdate(Student student,Subjectinfo...subjectinfos){
+		
+		List<Studentandsubject> al= this.getSubjectByStudent(student);
+		if (al!=null&&al.size()>0) {
+			daoMap.get(STUDENTANDSUBJECT).excute_delete(al.toArray());
+
+		}
+		al.clear();
+		
+		if (subjectinfos!=null&&subjectinfos.length>0) {
+			for (int i = 0; i < subjectinfos.length; i++) {
+				Studentandsubject bean=new Studentandsubject();
+				bean.setId(new StudentandsubjectId(student,subjectinfos[i]));
+				al.add(bean);
+			}
+			daoMap.get(STUDENTANDSUBJECT).excute_insert(al.toArray());
+			
+		}
+		return true;
+	}
+	
+	public Userinfo login(Userinfo user){
+		Criterion c1 = Restrictions.and(Restrictions.eq("logname", user.getLogname()), Restrictions.eq("keyword", user.getKeyword()));
+		List<Userinfo> infoes = daoMap.get(USERINFO).getInfosByProperties(c1);
+		
+		if (infoes!=null&&infoes.size()==1) {
+			Userinfo userinfo = infoes.get(0);
+			Userloginfo userloginfo = new Userloginfo(userinfo, new Date(),new Integer(1));
+//			daoMap.get(USERLOGINFO).excute_insert(userloginfo);
+			return userinfo;
+		}
+		
+		return null;
+	}
+	
+	
+	public Userinfo register(Userinfo user){
+		
+		System.out.println("@@"+user.getKeyword()+user.getLogname()+"@@");
+		
+		try{
+		daoMap.get(USERLOGINFO).excute_insert(user);
+		
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return user;
+	}
+	
+	
+	
+	public void exit(Userinfo user){
+		Userloginfo userloginfo = new Userloginfo(user,new Date(),new Integer(2));
+//		daoMap.get(USERLOGINFO).excute_insert(userloginfo);
+	}
+	
+	
+	
+	public boolean detelet_Student_clear(Student...students){
+		DAO dao_car = daoMap.get(STUDENT);
+		
+		List<Studentandsubject> list_sas=new ArrayList<Studentandsubject>();
+		List<Studentcard> list_card=new ArrayList<Studentcard>();
+		
+		for (Student student : students) {
+			list_card.add((Studentcard) dao_car.getByID(student.getStid()));
+			list_sas.addAll(getSubjectByStudent(student));
+			
+		}
+		delete_batch(STUDENTANDSUBJECT, list_sas.toArray());
+		delete_batch(STUDENTCARD, list_card.toArray());
+		delete_batch(STUDENT, students);
+		return true;
+	}
 }
+

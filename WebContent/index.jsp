@@ -1,20 +1,11 @@
-<%@page import="com.sun.xml.internal.bind.v2.TODO"%>
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@ taglib prefix="cc" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 	String path = request.getContextPath();
-// neusoftsms
-
-System.out.print(path);
 	String basePath = request.getScheme() + "://"
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
-	
-//@@@httpserverName localhost serverport8080
-//System.out.print("@@@"+ request.getScheme()+"serverName"+request.getServerName()+"serverport"+request.getServerPort());
 %>
-
-
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>

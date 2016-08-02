@@ -16,7 +16,5 @@
         <property name="cardbg" type="java.lang.Integer">
             <column name="cardbg" />
         </property>
-        
-        <one-to-one name="student"></one-to-one>
     </class>
 </hibernate-mapping>

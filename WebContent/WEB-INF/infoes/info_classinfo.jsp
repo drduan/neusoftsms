@@ -48,7 +48,7 @@
 		<thead class="tb_th">
 
 			<tr>
-				<th>编号</th>
+				<th></th>
 				<th>班号</th>
 				<th>名称</th>
 				<th>开班日期</th>
@@ -58,9 +58,8 @@
 					method="post">
 				<td>
 
-					<button title="修改信息" type="submit">
-						<img alt=""
-							src="/neusoftsms/imgs/Delete_Ticket_16px_1192297_easyicon.net.ico">
+					<button title="批量删除信息" type="submit">
+						<img src="/neusoftsms/imgs/Delete_Ticket_16px_1192297_easyicon.net.ico">
 					</button> <i>全选</i> <input type="checkbox" id="choosebt1">
 
 				</td>

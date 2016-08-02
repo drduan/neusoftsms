@@ -61,7 +61,7 @@
 					method="post">
 					<td>
 
-						<button title="删除信息" type="submit">
+						<button title="批量删除信息" type="submit">
 							<img alt=""
 								src="./imgs/Delete_Ticket_16px_1192297_easyicon.net.ico">
 						</button> <i>全选</i> <input type="checkbox" id="choosebt1">

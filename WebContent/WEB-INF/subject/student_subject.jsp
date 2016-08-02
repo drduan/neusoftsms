@@ -21,46 +21,109 @@
 <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 <meta http-equiv="description" content="This is my page">
 
-<link type="text/css" rel="stylesheet" href="./css/info.css">
+<link type="text/css" rel="stylesheet" href="./css/student_subject.css">
 <script type="text/javascript"
 	src="/neusoftsms/sysjs/jquery-2.1.1.min.js"></script>
 </head>
 
 <body>
+	<div style="width:650px;float:left;">
+		<i style="color:red;">学生姓名：</i> <i
+			style="font-style:normal; font-weight: bold;">${student.stname }</i>
+		&nbsp; <i style="color:red;">所在班级：</i><i
+			style="font-style:normal; font-weight: bold;">${student.classinfo.clname }</i>
+	</div>
+	<div class="btn_sub1">
+		
+		<button id="button_sub" style="width:50px;float:left;">保存</button>
+		
+	<form action="/neusoftsms/neusoft/crol/studentaction/toSubject"
+			method="post" style="width:50px;float:left;">
+			<button name="student.stid" value="${student.stid }">重置</button>
+	</form>
+	</div>
 	
-	${student }
-	<hr>
-	${subjects_now }
-	
-	${subjects_all }
-</body>
+	<hr style="clear: both;">
+	<div class="sub_title">
+		<div class="sub_title_left">已选课程</div>
+		<div class="sub_title_right">未选课程</div>
+	</div>
+
+	<form id="fm_submit" action="/neusoftsms/neusoft/crol/studentaction/updateSubjectOfStudent" method="post">
+		<input type="hidden" name="student.stid"value="${student.stid }">
+		<div id="dv1">
+			<cc:forEach items="${subjects_now }" var="StudentAndSubject">
+				<div>
+					${StudentAndSubject.id.subjectinfo.subname}
+					<button type="button">
+						<img src="/neusoftsms/imgs/arrow_right_16px_533384_easyicon.net.ico">
+					<input type="hidden"name="sub_infos.subid"
+						value="${StudentAndSubject.id.subjectinfo.subid}">
+					</button>
+					
+
+				</div>
+			</cc:forEach>
+	</div>
 </form>
+	<div id="dv2">
+
+		<cc:forEach items="${subjects_all }" var="subject">
+
+			<div>
+				${subject.subname}
+				<button type="button">
+					<img src="/neusoftsms/imgs/arrow_left_16px_533383_easyicon.net.ico">
+				<input type="hidden"name="sub_infos.subid"
+						value="${subject.subid}">
+				</button>
+
+			</div>
+		</cc:forEach>
+
+	</div>
+
+	<hr style="clear:both; margin-top:50px;">
+	<pre style="font-size: 12px;color:red;line-height: 20px;">
+操作说明：
+	    1、点击左右箭头实现课程调整。
+	    2、点击保存按钮进行已选课程的保存。
+	    3、在没有提交操作之前可以点击重置按钮恢复原有状态。
+	
+	</pre>
+</body>
 <script type="text/javascript">
 	(function() {
-		$("").ready(function() {
-			$(".bt_delete").click(function() {
-				return window.confirm("是否确认删除？");
-			});
+		$("")
+				.ready(
+						function() {
+							$("#dv1>div>button,#dv2>div>button")
+									.click(
+											function() {
 
-			$("#choosebt1").click(function() {
-				$("[name='batch_list.stid']").prop("checked", this.checked);
-			});
+												if ($(this).parent().parent()[0].id == "dv1") {
+													$(this).children("img").css("float","left");
+													$(this).children("img").attr("src","/neusoftsms/imgs/arrow_left_16px_533383_easyicon.net.ico");
+													$("#dv2").append(
+															$(this).parent());
+												} else {
+													$(this).children("img")
+															.css("float",
+																	"right");
+													$(this)
+															.children("img")
+															.attr("src",
+																	"/neusoftsms/imgs/arrow_right_16px_533384_easyicon.net.ico");
+													$("#dv1").append(
+															$(this).parent());
+												}
 
-			$("#fm_batch").submit(function() {
-
-				$("[name='batch_list.stid']").appendTo($(this));
-
-				return window.confirm("是否删除选中的信息?");
-
-			});
-
-			//反选操作
-			$("#choosebt2").click(function() {
-				$("[name='batch_list.stid']").each(function() {
-					this.checked = !this.checked;
-				});
-			});
+											});
+	  		$("#button_sub").click(function(){
+	  			$("#fm_submit")[0].submit();
+	  		});
 		});
 	})();
 </script>
+
 </html>
